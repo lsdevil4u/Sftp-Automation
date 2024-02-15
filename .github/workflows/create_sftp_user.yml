@@ -1,0 +1,25 @@
+name: Create SFTP User
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create_user:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Run Script to Create SFTP User
+        run: |
+          bash create_sftp_user.sh ${{ secrets.SFTP_USERNAME }}
