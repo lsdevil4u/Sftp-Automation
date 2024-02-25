@@ -22,4 +22,5 @@ jobs:
 
       - name: Run Script to Create SFTP User
         run: |
-          bash create_sftp_user.sh ${{ secrets.SFTP_USERNAME }}
+          bash create_sftp_user.sh sftpuser5
+
