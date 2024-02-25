@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#This Script will create a user in sftp server and create new ssh-public key and add into the user.
+
 # Input parameters
 username=$1
 
