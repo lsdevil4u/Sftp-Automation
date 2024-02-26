@@ -4,7 +4,7 @@
 #After that it will upload the key into s3 Bucket.
 
 # Input parameters
-username="SFTP_ext_create_user"
+username="sftp-external-DiamondAge-user-RO"
 
 # Clean up existing files in /tmp/
 rm -rf /tmp/*
