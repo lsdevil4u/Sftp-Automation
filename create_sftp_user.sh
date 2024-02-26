@@ -4,7 +4,7 @@
 #After that it will upload the key into s3 Bucket.
 
 # Input parameters
-username="testuser"
+username="SFTP_ext_create_user"
 
 # Clean up existing files in /tmp/
 rm -rf /tmp/*
@@ -19,7 +19,7 @@ ssh_public_key=$(cat /tmp/$username.pub)
 iam_role_arn="arn:aws:iam::660262893273:role/sftp-role"
 
 # Create SFTP user
-aws transfer create-user --server-id s-efd3d35baf264f6da --user-name $username --role $iam_role_arn --ssh-public-key-body "$ssh_public_key"
+aws transfer create-user --server-id s-efd3d35baf264f6da --user-name $username --role $iam_role_arn --ssh-public-key-body "$ssh_public_key" --tags Key=DeletionDate,Value=2024-02-29
 
 # Get public SSH key
 #ssh_key=$(aws transfer describe-user --server-id s-efd3d35baf264f6da --user-name $username --query 'User.SshPublicKeys[0]' --output text)
