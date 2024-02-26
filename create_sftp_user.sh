@@ -1,9 +1,13 @@
 #!/bin/bash
 
 #This Script will create a user in sftp server and create new ssh-public key and add into the user.
+#After that it will upload the key into s3 Bucket.
 
 # Input parameters
-username=$1
+username="testuser"
+
+# Clean up existing files in /tmp/
+rm -rf /tmp/*
 
 # Create SSH key pair
 ssh-keygen -t rsa -b 2048 -f /tmp/$username -N "" -C "$username@yourcompany.com"
