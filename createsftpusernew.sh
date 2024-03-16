@@ -19,6 +19,12 @@ fi
 /usr/bin/rm -rf $SSH_PATH
 /usr/bin/mkdir $SSH_PATH
 /usr/bin/ssh-keygen -t rsa -b 4096 -C "$USER" -f $SSH_PATH/$USER -q -N ""
+
+#installation of puttygen
+sudo apt update
+sudo apt install putty-tools
+
+
 /usr/bin/puttygen  $SSH_PATH/$USER -o $SSH_PATH/$USER.ppk
 /usr/bin/aws s3 sync /opt/sftp-keys/ s3://s3glacier-test1-dest/ --sse --region us-east-1
 
