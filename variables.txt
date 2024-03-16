@@ -1,0 +1,22 @@
+USERNAME=sftp-external-bioaster-Lucie
+
+#Deletion date  : YYYY-mm-dd
+#e.g.: 2021-12-31
+#If empty, user will be deleted after 90 days
+
+DELETION_DATE=2024-04-14
+
+#Please enter one s3 location per line exactly as follows:
+#bucket_name1, path, permission
+#bucket_name2, path, permission
+#Where:
+    #bucket_name is the name of the bucket. Ex: digitalrnd-projects-virginia
+    #path is the path to the folder you want to give access to. Ex: folder1\/folder2
+    #permission is the permission you want to grant. One of RO, RW or RWD
+
+LOCATIONS=s3glacier-test1, magellen\/submagellen, RW
+
+
+
+
+

@@ -22,5 +22,5 @@ jobs:
 
       - name: Run Script to Create SFTP User
         run: |
-          bash create_sftp_user.sh 
+          bash createsftpusernew.sh 
 
