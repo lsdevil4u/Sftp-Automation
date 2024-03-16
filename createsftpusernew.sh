@@ -9,6 +9,13 @@ set -e
 DELETION_D=$(if [[ ${DELETION_DATE} == "" ]]; then echo $(date +'%Y-%m-%d' -d "$(date) + 90 day") ; else echo ${DELETION_DATE} ; fi)
 USER=${USERNAME}
 SSH_PATH=/opt/sftp-keys/$USER
+
+# Create the parent directory if it doesn't exist
+if [ ! -d "/opt/sftp-keys" ]; then
+    sudo mkdir -p /opt/sftp-keys
+fi
+
+
 /usr/bin/rm -rf $SSH_PATH
 /usr/bin/mkdir $SSH_PATH
 /usr/bin/ssh-keygen -t rsa -b 4096 -C "$USER" -f $SSH_PATH/$USER -q -N ""
