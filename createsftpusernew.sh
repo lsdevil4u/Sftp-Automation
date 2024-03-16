@@ -71,7 +71,7 @@ echo "$policy"
 echo "Generated home directory mapping:"
 echo "$home_directory_mapping"
 
-/usr/bin/aws transfer create-user \
+aws transfer create-user \
 --user-name $USER \
 --tags "[{\"Key\": \"DeletionDate\",\"Value\": \"$DELETION_D\"}]" \
 --role arn:aws:iam::660262893273:role/sftp-role \
