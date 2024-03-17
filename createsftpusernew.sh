@@ -26,6 +26,14 @@ sudo apt install putty-tools
 
 
 /usr/bin/puttygen  $SSH_PATH/$USER -o $SSH_PATH/$USER.ppk
+
+#aws-cli installation
+sudo apt update
+sudo apt install awscli
+which aws
+aws --version
+
+
 /usr/bin/aws s3 sync /opt/sftp-keys/ s3://s3glacier-test1-dest/ --sse --region us-east-1
 
 # Initialize an array to store individual policy statements
@@ -73,10 +81,10 @@ echo "$home_directory_mapping"
 
 
 #aws-cli installation
-sudo apt update
-sudo apt install awscli
-which aws
-aws --version
+#sudo apt update
+#sudo apt install awscli
+#which aws
+#aws --version
 
 
 /usr/bin/aws transfer create-user \
@@ -87,3 +95,9 @@ aws --version
 --home-directory-type LOGICAL \
 --policy $policy \
 --home-directory-mappings $home_directory_mapping --region us-east-1
+
+
+
+
+
+
