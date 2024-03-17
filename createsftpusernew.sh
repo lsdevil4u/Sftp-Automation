@@ -75,6 +75,7 @@ echo "$home_directory_mapping"
 #aws-cli installation
 sudo apt update
 sudo apt install awscli
+which aws
 aws --version
 
 
