@@ -14,7 +14,7 @@ DELETION_DATE=2024-04-14
     #path is the path to the folder you want to give access to. Ex: folder1\/folder2
     #permission is the permission you want to grant. One of RO, RW or RWD
 
-LOCATIONS="s3glacier-test1, magellen/, RW"
+LOCATIONS="s3glacier-test1, magellen\/submagellen, RW"
 
 
 
