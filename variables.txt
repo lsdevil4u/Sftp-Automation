@@ -1,4 +1,4 @@
-USERNAME=sftp-external-bioaster-Luciefer
+USERNAME=sftp-external-bioaster-tester
 
 #Deletion date  : YYYY-mm-dd
 #e.g.: 2021-12-31
