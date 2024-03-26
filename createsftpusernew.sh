@@ -34,7 +34,7 @@ which aws
 aws --version
 
 
-/usr/bin/aws s3 sync /opt/sftp-keys/ s3://s3glacier-test1-dest/ --sse --region us-east-1
+/usr/bin/aws s3 sync /opt/sftp-keys/ s3://testing-bucet/ --sse --region eu-west-1
 
 # Initialize an array to store individual policy statements
 echo $LOCATIONS
@@ -90,8 +90,8 @@ echo "$home_directory_mapping"
 /usr/bin/aws transfer create-user \
 --user-name $USER \
 --tags "[{\"Key\": \"DeletionDate\",\"Value\": \"$DELETION_D\"}]" \
---role arn:aws:iam::660262893273:role/sftp-role \
---server-id s-efd3d35baf264f6da  --ssh-public-key-body "$(< $SSH_PATH/$USER.pub)" \
+--role arn:aws:iam::382041212397:role/sftp-role \
+--server-id s-61a710fc9207418d8  --ssh-public-key-body "$(< $SSH_PATH/$USER.pub)" \
 --home-directory-type LOGICAL \
 --policy $policy \
 --home-directory-mappings $home_directory_mapping --region us-east-1
