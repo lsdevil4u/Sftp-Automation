@@ -4,7 +4,7 @@ USERNAME=sftp-external-bioaster-user2
 #e.g.: 2021-12-31
 #If empty, user will be deleted after 90 days
 
-DELETION_DATE=2024-03-29
+DELETION_DATE=2024-06-29
 
 #Please enter one s3 location per line exactly as follows:
 #bucket_name1, path, permission
