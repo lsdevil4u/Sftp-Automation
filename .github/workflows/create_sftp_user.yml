@@ -19,7 +19,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::382041212397:role/sftp-github-role
+          role-to-assume: arn:aws:iam::533266989803:role/sftp-github-role
           role-session-name: github-session
           aws-region: us-east-1
 

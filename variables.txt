@@ -1,4 +1,4 @@
-USERNAME=sftp-external-bioaster-user2
+USERNAME=sftp-external-bioaster-user
 
 #Deletion date  : YYYY-mm-dd
 #e.g.: 2021-12-31
@@ -14,7 +14,7 @@ DELETION_DATE=2024-06-29
     #path is the path to the folder you want to give access to. Ex: folder1\/folder2
     #permission is the permission you want to grant. One of RO, RW or RWD
 
-LOCATIONS="digitalrnd-projects-ireland-new, DISCOBIO_LNP-M81_FLOW-CYTOMETRY_BIOQUAL\/s3-test, RW"
+LOCATIONS="digitalrnd-projects-ireland-bucket, DISCOBIO_LNP-M81_FLOW-CYTOMETRY_BIOQUAL\/s3-test, RW"
 
 
 
