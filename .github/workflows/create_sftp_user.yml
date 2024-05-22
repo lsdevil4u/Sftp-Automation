@@ -1,4 +1,4 @@
-name: Create SFTP User
+name: deployment
 
 on:
   push:
@@ -6,24 +6,24 @@ on:
       - main
 
 jobs:
-  create_user:
+  deploy:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
+      contents: read
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::382041212397:role/sftp-github-role
           role-session-name: github-session
           aws-region: us-east-1
 
-      
       - name: Run Script to Create SFTP User
         run: |
-          bash createsftpusernew.sh 
+          bash createsftpusernew.sh
 
