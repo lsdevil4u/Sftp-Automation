@@ -75,13 +75,10 @@ echo "$home_directory_mapping"
 --user-name $USER \
 --tags "[{\"Key\": \"DeletionDate\",\"Value\": \"$DELETION_D\"}]" \
 --role arn:aws:iam::533266989803:role/sftp-role \
---server-id s-138b528d3f954b46b --ssh-public-key-body "$(< $SSH_PATH/$USER.pub)" \
+--server-id s-fe45120196a54b9d9 --ssh-public-key-body "$(< $SSH_PATH/$USER.pub)" \
 --home-directory-type LOGICAL \
 --policy $policy \
 --home-directory-mappings $home_directory_mapping --region us-east-1
-
-
-
 
 
 

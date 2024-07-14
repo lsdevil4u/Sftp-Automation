@@ -1,0 +1,33 @@
+name: Create SFTP User
+description: Fill out this form to request the creation of an SFTP user.
+title: "[SFTP User Request]"
+labels: sftp-user
+assignees: ''
+
+body:
+  - type: input
+    id: username
+    attributes:
+      label: Username
+      description: "Enter the username for the SFTP user (e.g., sftp-external-bioaster-user2)"
+      placeholder: "sftp-external-bioaster-user2"
+      required: true
+
+  - type: input
+    id: deletion_date
+    attributes:
+      label: Deletion Date
+      description: "Enter the deletion date in YYYY-MM-DD format (e.g., 2024-06-29), or leave blank for default 90 days"
+      placeholder: "2024-06-29"
+      required: false
+
+  - type: textarea
+    id: locations
+    attributes:
+      label: S3 Locations
+      description: "Enter one S3 location per line in the format: bucket_name, path, permission (e.g., digitalrnd-projects-ireland-bucket, DISCOBIO_LNP-M81_FLOW-CYTOMETRY_BIOQUAL/s3-test, RW)"
+      placeholder: "bucket_name, path, permission"
+      value: |
+        digitalrnd-projects-ireland-bucket, DISCOBIO_LNP-M81_FLOW-CYTOMETRY_BIOQUAL/s3-test, RW
+      required: true
+

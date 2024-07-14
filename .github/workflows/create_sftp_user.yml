@@ -26,10 +26,9 @@ jobs:
       - name: Extract Issue Details
         id: issue_details
         run: |
-          echo "USERNAME=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=\*\*Username:\*\* ).*')" >> $GITHUB_ENV
-          echo "DELETION_DATE=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=\*\*Deletion Date:\*\* ).*')" >> $GITHUB_ENV
-          LOCATIONS=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=\*\*Locations:\*\* ).*' | tr '\n' ' ')
-          echo "LOCATIONS=${LOCATIONS//<!--/}" >> $GITHUB_ENV
+          echo "USERNAME=${{ github.event.issue.body | fromJson | select(.fields | .username) }}" >> $GITHUB_ENV
+          echo "DELETION_DATE=${{ github.event.issue.body | fromJson | select(.fields | .deletion_date) }}" >> $GITHUB_ENV
+          echo "LOCATIONS=${{ github.event.issue.body | fromJson | select(.fields | .locations) }}" >> $GITHUB_ENV
 
       - name: Run Script to Create SFTP User
         run: |
