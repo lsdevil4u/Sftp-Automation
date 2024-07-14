@@ -2,11 +2,7 @@
 
 set -e
 
-# Source variables from the variables file
-. variables.txt
-
-
-DELETION_D=$(if [[ ${DELETION_DATE} == "" ]]; then echo $(date +'%Y-%m-%d' -d "$(date) + 90 day") ; else echo ${DELETION_DATE} ; fi)
+DELETION_D=$(if [[ -z "${DELETION_DATE}" ]]; then echo $(date +'%Y-%m-%d' -d "$(date) + 90 day") ; else echo ${DELETION_DATE} ; fi)
 USER=${USERNAME}
 SSH_PATH=/opt/sftp-keys/$USER
 
@@ -15,29 +11,25 @@ if [ ! -d "/opt/sftp-keys" ]; then
     sudo mkdir -p /opt/sftp-keys
 fi
 
-
 /usr/bin/rm -rf $SSH_PATH
 /usr/bin/mkdir $SSH_PATH
 /usr/bin/ssh-keygen -t rsa -b 4096 -C "$USER" -f $SSH_PATH/$USER -q -N ""
 
-#installation of puttygen
+# installation of puttygen
 sudo apt update
 sudo apt install putty-tools
 
-
 /usr/bin/puttygen  $SSH_PATH/$USER -o $SSH_PATH/$USER.ppk
 
-#aws-cli installation
+# aws-cli installation
 sudo apt update
 sudo apt install awscli
 which aws
 aws --version
 
-
 /usr/bin/aws s3 sync /opt/sftp-keys/ s3://testing-buket/ --sse --region us-east-1
 
 # Initialize an array to store individual policy statements
-echo $LOCATIONS
 policy_statements=()
 bucket_arns=()
 
@@ -79,19 +71,11 @@ echo "$policy"
 echo "Generated home directory mapping:"
 echo "$home_directory_mapping"
 
-
-#aws-cli installation
-#sudo apt update
-#sudo apt install awscli
-#which aws
-#aws --version
-
-
 /usr/bin/aws transfer create-user \
 --user-name $USER \
 --tags "[{\"Key\": \"DeletionDate\",\"Value\": \"$DELETION_D\"}]" \
 --role arn:aws:iam::533266989803:role/sftp-role \
---server-id s-98f6d04dbbcf45c6b  --ssh-public-key-body "$(< $SSH_PATH/$USER.pub)" \
+--server-id s-138b528d3f954b46b --ssh-public-key-body "$(< $SSH_PATH/$USER.pub)" \
 --home-directory-type LOGICAL \
 --policy $policy \
 --home-directory-mappings $home_directory_mapping --region us-east-1

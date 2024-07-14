@@ -1,13 +1,13 @@
 name: deployment
 
 on:
-  push:
-    branches:
-      - main
+  issues:
+    types: [opened]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: github.event.issue.labels.*.name contains 'sftp-user'
     permissions:
       id-token: write
       contents: read
@@ -22,6 +22,14 @@ jobs:
           role-to-assume: arn:aws:iam::533266989803:role/sftp-github-role
           role-session-name: github-session
           aws-region: us-east-1
+
+      - name: Extract Issue Details
+        id: issue_details
+        run: |
+          echo "USERNAME=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=\*\*Username:\*\* ).*')" >> $GITHUB_ENV
+          echo "DELETION_DATE=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=\*\*Deletion Date:\*\* ).*')" >> $GITHUB_ENV
+          LOCATIONS=$(echo "${{ github.event.issue.body }}" | grep -oP '(?<=\*\*Locations:\*\* ).*' | tr '\n' ' ')
+          echo "LOCATIONS=${LOCATIONS//<!--/}" >> $GITHUB_ENV
 
       - name: Run Script to Create SFTP User
         run: |
