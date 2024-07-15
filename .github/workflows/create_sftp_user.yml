@@ -2,12 +2,12 @@ name: deployment
 
 on:
   issues:
-    types: [opened]
+    types: [opened, labeled]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: contains(github.event.issue.labels.*.name, 'sftp-user')
+    if: contains(github.event.issue.labels.*.name, 'sftp-user') || contains(github.event.label.name, 'sftp-user')
     permissions:
       id-token: write
       contents: read
@@ -15,6 +15,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+
+      - name: Print Event Payload
+        run: |
+          echo "Event payload:"
+          echo ${{ toJson(github.event) }}
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
