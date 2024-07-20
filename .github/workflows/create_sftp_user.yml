@@ -7,7 +7,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: contains(github.event.issue.labels.*.name, 'sftp-user') || (github.event_name == 'labeled' && github.event.label.name == 'sftp-user')
+    if: |
+      contains(github.event.issue.labels.*.name, 'sftp-user') || 
+      (github.event_name == 'labeled' && github.event.label.name == 'sftp-user')
     permissions:
       id-token: write
       contents: read
@@ -21,6 +23,14 @@ jobs:
           echo "Event payload:"
           echo ${{ toJson(github.event) }}
 
+      - name: Check Labels
+        run: |
+          echo "Issue Labels:"
+          echo "${{ toJson(github.event.issue.labels) }}"
+          if [ "${{ github.event_name }}" == "labeled" ]; then
+            echo "Event Label: ${{ github.event.label.name }}"
+          fi
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -31,9 +41,9 @@ jobs:
       - name: Extract Issue Details
         id: issue_details
         run: |
-          echo "USERNAME=$(echo '${{ github.event.issue.body }}' | jq -r '.[] | select(.id=="\"username\"") | .value')" >> $GITHUB_ENV
-          echo "DELETION_DATE=$(echo '${{ github.event.issue.body }}' | jq -r '.[] | select(.id=="\"deletion_date\"") | .value')" >> $GITHUB_ENV
-          echo "LOCATIONS=$(echo '${{ github.event.issue.body }}' | jq -r '.[] | select(.id=="\"locations\"") | .value')" >> $GITHUB_ENV
+          echo "USERNAME=$(echo '${{ github.event.issue.body }}' | jq -r '.[] | select(.id=="username") | .value')" >> $GITHUB_ENV
+          echo "DELETION_DATE=$(echo '${{ github.event.issue.body }}' | jq -r '.[] | select(.id=="deletion_date") | .value')" >> $GITHUB_ENV
+          echo "LOCATIONS=$(echo '${{ github.event.issue.body }}' | jq -r '.[] | select(.id=="locations") | .value')" >> $GITHUB_ENV
           echo "Extracted details:"
           echo "USERNAME=${{ env.USERNAME }}"
           echo "DELETION_DATE=${{ env.DELETION_DATE }}"
@@ -42,4 +52,3 @@ jobs:
       - name: Run Script to Create SFTP User
         run: |
           bash createsftpusernew.sh
-
