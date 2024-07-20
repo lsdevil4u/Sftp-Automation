@@ -11,14 +11,12 @@ body:
       label: Username
       description: "Enter the username for the SFTP user (e.g., sftp-external-bioaster-user2)"
       placeholder: "sftp-external-bioaster-user2"
-
   - type: input
     id: deletion_date
     attributes:
       label: Deletion Date
       description: "Enter the deletion date in YYYY-MM-DD format (e.g., 2024-06-29), or leave blank for default 90 days"
       placeholder: "2024-06-29"
-
   - type: textarea
     id: locations
     attributes:
