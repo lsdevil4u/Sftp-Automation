@@ -15,7 +15,7 @@ fi
 /usr/bin/mkdir $SSH_PATH
 /usr/bin/ssh-keygen -t rsa -b 4096 -C "$USER" -f $SSH_PATH/$USER -q -N ""
 
-# installation of puttygen
+#installation of puttygen
 sudo apt update
 sudo apt install putty-tools
 
